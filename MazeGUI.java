@@ -47,7 +47,7 @@ public class MazeGUI extends JFrame {
 				if (engine.playerWins()) {
 					JOptionPane.showMessageDialog(MazeGUI.this,
 							"Congratulations! You found the exit.\nYour got "
-									+ infoPanel.getInfoSteps() * 1 + infoPanel.getInfoCoins()
+									+ ((infoPanel.getInfoSteps() * -1) + (infoPanel.getInfoCoins() * 5))
 									+ "points",
 							"Level Complete", JOptionPane.INFORMATION_MESSAGE);
 
