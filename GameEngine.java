@@ -23,7 +23,7 @@ public class GameEngine {
 	}
 
 	public boolean playerWins() {
-		return false;
+		return hasWon;
 	}
 
 	private void findPlayer() {
