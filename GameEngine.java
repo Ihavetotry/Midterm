@@ -1,11 +1,17 @@
 package edu.txst.midterm;
 
+/**
+ * This class controls the game logic that includes the game movement,
+ * the amount of steps taken, the coins collected and the win detection.
+ */
 public class GameEngine {
 	private Board board;
 	private int playerRow;
 	private int playerCol;
 	private int exitRow;
 	private int exitCol;
+	private StepCounter stepCounter;
+	private int coins;
 
 	// Cell Type Constants
 	private static final int FLOOR = 0;
@@ -14,17 +20,45 @@ public class GameEngine {
 	private static final int EXIT = 5;
 	private static final int PLAYER = 6;
 
-
+	/**
+	 * The constructor of the game engine for the board
+	 * @param board creates a new board
+	 */
 	public GameEngine(Board board) {
 		this.board = board;
+		this.stepCounter = new StepCounter();
+		this.coins = 0;
 		findPlayer();
 		findExit();
 	}
 
+	/**
+	 * Determines when player has "won" or entered the exit
+	 * @return if players has entered the exit
+	 */
 	public boolean playerWins() {
 		return false;
 	}
 
+	/**
+	 * Returns the total amount of coins
+	 * @return the current amount of coins
+	 */
+	public int getCoins() {
+		return coins;
+	}
+
+	/**
+	 * Returns the amount of step taken
+	 * @return the current step count
+	 */
+	public int getSteps(){
+		return stepCounter.getSteps();
+	}
+
+	/**
+	 * This locates where the player is on the board
+	 */
 	private void findPlayer() {
 		for (int r = 0; r < 5; r++) {
 			for (int c = 0; c < 10; c++) {
@@ -37,6 +71,9 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * Determines where the exit is located on the board
+	 */
 	private void findExit() {
 		for (int r = 0; r < 5; r++) {
 			for (int c = 0; c < 10; c++) {
@@ -65,6 +102,10 @@ public class GameEngine {
 			return; // Movement blocked
 		}
 
+		if(targetCell == COIN){
+			coins++;
+		}
+
 		// Move the Player
 		// Current position becomes Floor (or Goal if player was standing on one)
 		// Note: For simplicity, this engine assumes player replaces the cell.
@@ -74,6 +115,8 @@ public class GameEngine {
 		playerRow = targetRow;
 		playerCol = targetCol;
 		board.setCell(playerRow, playerCol, PLAYER);
+
+		stepCounter.increaseSteps();
 
 	}
 }
