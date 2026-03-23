@@ -6,6 +6,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
+/**
+ * The user interface for the maze game
+ */
 public class MazeGUI extends JFrame {
 	private Board originalBoard;
 	private Board currentBoard;
@@ -41,13 +44,16 @@ public class MazeGUI extends JFrame {
 					case KeyEvent.VK_LEFT -> engine.movePlayer(0, -1);
 					case KeyEvent.VK_RIGHT -> engine.movePlayer(0, 1);
 				}
+
+				infoPanel.setInfoSteps(engine.getSteps());
+				infoPanel.setInfoCoins(engine.getCoins());
 				gamePanel.repaint();
 
 				// Check for victory
 				if (engine.playerWins()) {
 					JOptionPane.showMessageDialog(MazeGUI.this,
 							"Congratulations! You found the exit.\nYour got "
-									+ infoPanel.getInfoSteps() * 1 + infoPanel.getInfoCoins()
+									+ ((infoPanel.getInfoSteps() * -1) + (infoPanel.getInfoCoins() * 5))
 									+ "points",
 							"Level Complete", JOptionPane.INFORMATION_MESSAGE);
 
@@ -59,6 +65,9 @@ public class MazeGUI extends JFrame {
 		});
 	}
 
+	/**
+	 *
+	 */
 	private void initMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu gameMenu = new JMenu("Game");
@@ -76,6 +85,9 @@ public class MazeGUI extends JFrame {
 		setJMenuBar(menuBar);
 	}
 
+	/**
+	 *
+	 */
 	private void openFile() {
 		JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
 		int result = fileChooser.showOpenDialog(this);
@@ -95,6 +107,9 @@ public class MazeGUI extends JFrame {
 		}
 	}
 
+	/**
+	 *
+	 */
 	private void resetGame() {
 		if (originalBoard != null) {
 			currentBoard = originalBoard.clone();
@@ -104,11 +119,17 @@ public class MazeGUI extends JFrame {
 		}
 	}
 
+	/**
+	 *
+	 */
 	// Inner class for information panel
 	private class InfoPanel extends JPanel {
 		private JLabel infoSteps;
 		private JLabel infoCoins;
 
+		/**
+		 *
+		 */
 		public InfoPanel() {
 			this.setLayout(new FlowLayout());
 			this.add(new JLabel("Steps: "));
@@ -122,32 +143,59 @@ public class MazeGUI extends JFrame {
 			this.add(infoCoins);
 		}
 
+		/**
+		 *
+		 * @param remainingSteps
+		 */
 		public void setInfoSteps(int remainingSteps) {
 			this.infoSteps.setText(Integer.toString(remainingSteps));
 		}
 
+		/**
+		 *
+		 * @return
+		 */
 		public int getInfoSteps() {
 			return Integer.parseInt(this.infoSteps.getText());
 		}
 
+		/**
+		 *
+		 * @param infoCoins
+		 */
 		public void setInfoCoins(int infoCoins) {
 			this.infoCoins.setText(Integer.toString(infoCoins));
 		}
 
+		/**
+		 *
+		 * @return
+		 */
 		public int getInfoCoins() {
 			return Integer.parseInt(this.infoCoins.getText());
 		}
 	}
 
+	/**
+	 *
+	 */
 	// Inner class for custom rendering
 	private class GamePanel extends JPanel {
 		private Board board;
 		private final int TILE_SIZE = 64; // Scale up for visibility
 
+		/**
+		 *
+		 * @param board
+		 */
 		public void setBoard(Board board) {
 			this.board = board;
 		}
 
+		/**
+		 *
+		 * @param g the <code>Graphics</code> object to protect
+		 */
 		@Override
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
@@ -162,6 +210,13 @@ public class MazeGUI extends JFrame {
 			}
 		}
 
+		/**
+		 *
+		 * @param g
+		 * @param type
+		 * @param x
+		 * @param y
+		 */
 		private void drawTile(Graphics g, int type, int x, int y) {
 			// Placeholder colors until you link the sprite loading logic
 			switch (type) {
@@ -178,6 +233,10 @@ public class MazeGUI extends JFrame {
 		}
 	}
 
+	/**
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> new MazeGUI().setVisible(true));
 	}
