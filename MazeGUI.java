@@ -7,7 +7,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 
 /**
- * The user interface for the maze game
+ * The user interface for the maze game. It handles the
+ * rendering and the keyboard inputs.
  */
 public class MazeGUI extends JFrame {
 	private Board originalBoard;
@@ -66,7 +67,7 @@ public class MazeGUI extends JFrame {
 	}
 
 	/**
-	 *
+	 * This creates menu bar for opening and resetting the game.
 	 */
 	private void initMenu() {
 		JMenuBar menuBar = new JMenuBar();
@@ -86,7 +87,7 @@ public class MazeGUI extends JFrame {
 	}
 
 	/**
-	 *
+	 * This opens the file and loads the current CSV map choosen.
 	 */
 	private void openFile() {
 		JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
@@ -108,7 +109,7 @@ public class MazeGUI extends JFrame {
 	}
 
 	/**
-	 *
+	 * Resets the game and restores the original board.
 	 */
 	private void resetGame() {
 		if (originalBoard != null) {
@@ -120,7 +121,7 @@ public class MazeGUI extends JFrame {
 	}
 
 	/**
-	 *
+	 *This panel displays the current numbers of steps and coins collected
 	 */
 	// Inner class for information panel
 	private class InfoPanel extends JPanel {
@@ -128,7 +129,7 @@ public class MazeGUI extends JFrame {
 		private JLabel infoCoins;
 
 		/**
-		 *
+		 *Creates the info panel that and initializes the steps
 		 */
 		public InfoPanel() {
 			this.setLayout(new FlowLayout());
