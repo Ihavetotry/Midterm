@@ -6,6 +6,7 @@ public class GameEngine {
 	private int playerCol;
 	private int exitRow;
 	private int exitCol;
+	private boolean hasWon = false;
 
 	// Cell Type Constants
 	private static final int FLOOR = 0;
@@ -15,14 +16,18 @@ public class GameEngine {
 	private static final int PLAYER = 6;
 
 
+
 	public GameEngine(Board board) {
 		this.board = board;
 		findPlayer();
 		findExit();
 	}
 
-	public boolean playerWins() {
-		return false;
+	public boolean playerWins()
+	{
+
+		return hasWon;
+
 	}
 
 	private void findPlayer() {
@@ -65,11 +70,17 @@ public class GameEngine {
 			return; // Movement blocked
 		}
 
+		if (targetCell == EXIT) {
+			hasWon = true;
+		}
+
+
 		// Move the Player
 		// Current position becomes Floor (or Goal if player was standing on one)
 		// Note: For simplicity, this engine assumes player replaces the cell.
 		// If you want "Player on Goal", you'd add a 6th constant.
 		board.setCell(playerRow, playerCol, FLOOR);
+
 
 		playerRow = targetRow;
 		playerCol = targetCol;
