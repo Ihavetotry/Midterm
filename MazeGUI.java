@@ -127,8 +127,8 @@ public class MazeGUI extends JFrame {
 		private JLabel infoSteps;
 		private JLabel infoCoins;
 
-		/**Infopanel for number of coins and steps taken
-		 *using labels
+		/**
+		 *
 		 */
 		public InfoPanel() {
 			this.setLayout(new FlowLayout());
@@ -143,7 +143,7 @@ public class MazeGUI extends JFrame {
 			this.add(infoCoins);
 		}
 
-		/**Updates the remaining numbers of steps
+		/**
 		 *
 		 * @param remainingSteps
 		 */
@@ -151,25 +151,25 @@ public class MazeGUI extends JFrame {
 			this.infoSteps.setText(Integer.toString(remainingSteps));
 		}
 
-		/**Retrieves the displayed number of steps
+		/**
 		 *
-		 * @return number of steps shown in the panel
+		 * @return
 		 */
 		public int getInfoSteps() {
 			return Integer.parseInt(this.infoSteps.getText());
 		}
 
-		/**Updates the display number of coins
+		/**
 		 *
-		 * @param infoCoins the number of coins to display
+		 * @param infoCoins
 		 */
 		public void setInfoCoins(int infoCoins) {
 			this.infoCoins.setText(Integer.toString(infoCoins));
 		}
 
-		/**retrieves the current displayed number of coins
+		/**
 		 *
-		 * @return the number of coins shown on the panel
+		 * @return
 		 */
 		public int getInfoCoins() {
 			return Integer.parseInt(this.infoCoins.getText());
