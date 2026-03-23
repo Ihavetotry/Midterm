@@ -6,6 +6,7 @@ public class GameEngine {
 	private int playerCol;
 	private int exitRow;
 	private int exitCol;
+	private boolean	hasWon = false;
 
 	// Cell Type Constants
 	private static final int FLOOR = 0;
@@ -63,6 +64,9 @@ public class GameEngine {
 		// Check for Walls or Out of Bounds
 		if (targetCell == WALL || targetCell == -1) {
 			return; // Movement blocked
+		}
+		if (targetCell == EXIT){
+			hasWon = true;
 		}
 
 		// Move the Player
