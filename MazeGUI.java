@@ -178,7 +178,7 @@ public class MazeGUI extends JFrame {
 	}
 
 	/**
-	 *
+	 * displays the game board
 	 */
 	// Inner class for custom rendering
 	private class GamePanel extends JPanel {
@@ -186,16 +186,16 @@ public class MazeGUI extends JFrame {
 		private final int TILE_SIZE = 64; // Scale up for visibility
 
 		/**
-		 *
-		 * @param board
+		 * stores the board inside the class so it can be used later
+		 * @param board the game board object being passed into this class
 		 */
 		public void setBoard(Board board) {
 			this.board = board;
 		}
 
 		/**
-		 *
-		 * @param g the <code>Graphics</code> object to protect
+		 * draws the entire game board on the screen
+		 * @param g the drawing tool used to render everything inside this panel
 		 */
 		@Override
 		protected void paintComponent(Graphics g) {
@@ -213,10 +213,10 @@ public class MazeGUI extends JFrame {
 
 		/**
 		 *
-		 * @param g
-		 * @param type
-		 * @param x
-		 * @param y
+		 * @param g the drawing tool used to render shapes/colors on the screen
+		 * @param type what kind of tile to draw
+		 * @param x the position on the screen where the tile should be drawn
+		 * @param y the position on the screen where the tile should be drawn
 		 */
 		private void drawTile(Graphics g, int type, int x, int y) {
 			// Placeholder colors until you link the sprite loading logic
@@ -235,7 +235,7 @@ public class MazeGUI extends JFrame {
 	}
 
 	/**
-	 *
+	 * creates and displays the MazeGUI window on Swing’s UI thread
 	 * @param args
 	 */
 	public static void main(String[] args) {
